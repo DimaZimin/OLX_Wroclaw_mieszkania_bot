@@ -1,0 +1,6 @@
+token.json
+db.db
+venv
+venv/
+.idea/
+__pychache__/
