@@ -3,4 +3,4 @@ db.db
 venv
 venv/
 .idea/
-__pychache__/
+__pycache__/
