@@ -104,8 +104,6 @@ class Parser:
             data = json.load(json_db)
             rooms = data['rooms']
             new_ads = rooms[self._rooms_index[nrooms]][nrooms][0]['new']
-            old_ads = rooms[self._rooms_index[nrooms]][nrooms][0]['old']
-            del old_ads[0]
             self.write_json(data, self.file)
             return new_ads
 

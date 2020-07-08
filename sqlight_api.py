@@ -35,10 +35,20 @@ class SQLighter:
         with self.connection:
             return self.cursor.execute("UPDATE `subscriptions` SET `rooms` = ? WHERE `user_id` = ?", (rooms, user_id))
 
+    def update_price(self, user_id, price):
+        with self.connection:
+            return self.cursor.execute("UPDATE `subscriptions` SET `price` = ? WHERE `user_id` = ?", (price, user_id))
+
     def get_user_settings(self, user_id):
         with self.connection:
             settings = self.cursor.execute('SELECT * FROM `subscriptions` WHERE `user_id` = ?', (user_id,)).fetchall()
             return settings
+
+    def get_user_price(self, user_id):
+        with self.connection:
+            price = self.cursor.execute('SELECT `price` FROM `subscriptions` where `user_id` = ?',
+                                        (user_id,)).fetchone()
+            return price
 
     def close(self):
         """close connection with db"""
