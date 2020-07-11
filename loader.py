@@ -10,7 +10,9 @@ storage = MemoryStorage()
 with open('token.json') as json_file:
     token = json.load(json_file)
 
-logging.basicConfig(format=u'%(filename)s [LINE:%(lineno)d] #%(levelname)-8s [%(asctime)s]  %(message)s',
+logging.basicConfig(filename='logs.log',
+                    filemode='a',
+                    format=u'%(filename)s [LINE:%(lineno)d] #%(levelname)-8s [%(asctime)s]  %(message)s',
                     level=logging.INFO,
                     )
 bot = Bot(token=token['TOKEN'])

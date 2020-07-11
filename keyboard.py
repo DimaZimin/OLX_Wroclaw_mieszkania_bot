@@ -9,15 +9,15 @@ def start_keys():
     return InlineKeyboardMarkup(
         inline_keyboard=[
             [InlineKeyboardButton(text="✅Aktywuj wyszukiwanie", callback_data=start_subscription.new(action='next'))],
-            [InlineKeyboardButton(text="✉️Skontaktować sie z autorem", url='telegram.me/dimazmn')]])
+            [InlineKeyboardButton(text="✉️Skontaktuj się z deweloperem", url='telegram.me/dimazmn')]])
 
 
 final_keys = InlineKeyboardMarkup(
     inline_keyboard=[
         [InlineKeyboardButton(text="✅Aktywuj wyszukiwanie", callback_data=start_subscription.new(action='next'))],
-        [InlineKeyboardButton(text="📤️Poleć znajomym", switch_inline_query='Cześć! Szukasz mieszkanie we Wrocławiu?'
+        [InlineKeyboardButton(text="📤️Poleć znajomym", switch_inline_query='Cześć! Szukasz mieszkania we Wrocławiu?'
                                                                            'Mogę Ci w tym pomoc.')],
-        [InlineKeyboardButton(text="✉️Skontaktować się z autorem", url='telegram.me/dimazmn')]
+        [InlineKeyboardButton(text="✉️Skontaktuj się z deweloperem", url='telegram.me/dimazmn')]
     ])
 
 
@@ -31,5 +31,4 @@ def rooms_key():
     ])
 
 
-# unsubscribe_key = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='🚫Zrezygnować z nowych powiadomień')]])
-unsubscribe_key = ReplyKeyboardMarkup().row(KeyboardButton(text='🚫Zrezygnować z nowych powiadomień'))
+unsubscribe_key = ReplyKeyboardMarkup().row(KeyboardButton(text='🚫Zrezygnuj z otrzymywania nowych powiadomień'))
