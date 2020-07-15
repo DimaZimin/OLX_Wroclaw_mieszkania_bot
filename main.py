@@ -47,7 +47,9 @@ async def set_number_of_rooms(call: CallbackQuery):
     await call.answer(cache_time=60)
     callback_data = (call.message.text, call.message.chat.id)
     logging.info(f'call = {callback_data[0]}\tchat id: {callback_data[1]}')
+    db.add_subscriber(call.message.chat.id)
     db.update_rooms(call.message.chat.id, 'one')
+    logging.info(f'ROOMS UPDATED FOR CHAT ID: {callback_data[1]} = ONE')
     await Form.price.set()
     await call.message.edit_reply_markup()
     await call.message.answer('Używając cyfr określ maksymalny czynsz miesięczny w zł.')
@@ -58,7 +60,9 @@ async def set_number_of_rooms(call: CallbackQuery):
     await call.answer(cache_time=60)
     callback_data = (call.message.text, call.message.chat.id)
     logging.info(f'call = {callback_data[0]}\tchat id: {callback_data[1]}')
+    db.add_subscriber(call.message.chat.id)
     db.update_rooms(call.message.chat.id, 'two')
+    logging.info(f'ROOMS UPDATED FOR CHAT ID: {callback_data[1]} = TWO')
     await Form.price.set()
     await call.message.edit_reply_markup()
     await call.message.answer('Używając cyfr określ maksymalny czynsz miesięczny w zł.')
@@ -69,7 +73,9 @@ async def set_number_of_rooms(call: CallbackQuery):
     await call.answer(cache_time=60)
     callback_data = (call.message.text, call.message.chat.id)
     logging.info(f'call = {callback_data[0]}\tchat id: {callback_data[1]}')
+    db.add_subscriber(call.message.chat.id)
     db.update_rooms(call.message.chat.id, 'three')
+    logging.info(f'ROOMS UPDATED FOR CHAT ID: {callback_data[1]} = THREE')
     await Form.price.set()
     await call.message.edit_reply_markup()
     await call.message.answer('Używając cyfr określ maksymalny czynsz miesięczny w zł.')
@@ -80,7 +86,9 @@ async def set_number_of_rooms(call: CallbackQuery):
     await call.answer(cache_time=60)
     callback_data = (call.message.text, call.message.chat.id)
     logging.info(f'call = {callback_data[0]}\tchat id: {callback_data[1]}')
+    db.add_subscriber(call.message.chat.id)
     db.update_rooms(call.message.chat.id, 'four')
+    logging.info(f'ROOMS UPDATED FOR CHAT ID: {callback_data[1]} = FOUR')
     await Form.price.set()
     await call.message.edit_reply_markup()
     await call.message.answer('Używając cyfr określ maksymalny czynsz miesięczny w zł.')
@@ -109,7 +117,7 @@ async def subscribe(message: Message):
     await message.answer('Proszę poczekać...')
     if not db.subscriber_exists(message.chat.id):
         db.add_subscriber(message.chat.id)
-        logging.info(f'Subscribe user {message.from_user.id}')
+        logging.info(f'{message.from_user.id} TRIED TO SUBSCRIBE USING A COMMAND ')
     else:
         db.update_subscription(message.chat.id, True)
         logging.info(f'Subscribtion updated for user {message.from_user.id}')
@@ -124,7 +132,11 @@ async def unsubscribe(message: types.Message):
     if not db.subscriber_exists(message.chat.id):
         db.add_subscriber(message.from_user.id, False)
         logging.info(f'TRIED TO UNSUBSCRIBE WHILE NOT SUBSCRIBED {message.from_user.id}')
-        await message.answer("Subskrypcja nie jest aktywowana.")
+        await message.answer(text=f"Witaj, {message.from_user.full_name}!\n"
+                                  f"Aby zacząć proces śledzenia ogłoszeń naciśnij „Aktywuj wyszukiwanie”. "
+                                  f"W razie jakichkolwiek pytań lub sugestii, "
+                                  f"zachęcam do kontaktu z deweloperem poprzez kliknięcie przycisku poniżej.",
+                             reply_markup=start_keys())
     else:
         db.update_subscription(message.chat.id, False)
         logging.info(f'UNSUBSCRIBE {message.from_user.id}')
