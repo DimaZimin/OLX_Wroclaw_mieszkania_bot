@@ -16,7 +16,7 @@ fake-useragent==0.1.11
 future==0.18.2
 html5lib==1.0.1
 idna==2.9
-lxml==4.5.0
+lxml==4.6.5
 multidict==4.7.6
 parse==1.15.0
 pycparser==2.20
